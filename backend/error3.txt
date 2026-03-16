@@ -1,0 +1,132 @@
+﻿python : D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\google\api_core\_
+python_version_support.
+py:275: FutureWarning: 
+You are using a Python 
+version (3.10.8) which 
+Google will stop 
+supporting in new 
+releases of 
+google.api_core once 
+it reaches its end of 
+life (2026-10-04). 
+Please upgrade to the 
+latest Python version, 
+or at least Python 
+3.11, to continue 
+receiving updates for 
+google.api_core past 
+that date.
+At line:1 char:75
++ ... stall 
+--force-reinstall 
+srsly spacy thinc; 
+python app.py 2>&1 | 
+Out-F ...
++                      
+                       
+   ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (D:\Legal Assi   
+ st...past that dat    
+e.:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+  
+warnings.warn(message, 
+FutureWarning)
+Traceback (most recent 
+call last):
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\app.py", line 
+14, in <module>
+    from nlp import 
+process_query # 
+pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\nlp.py", line 4, 
+in <module>
+    import spacy # 
+pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\spacy\__init__.py
+", line 6, in <module>
+    from .errors 
+import 
+setup_default_warnings
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\spacy\errors.py",
+ line 3, in <module>
+    from .compat 
+import Literal
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\spacy\compat.py",
+ line 5, in <module>
+    from thinc.util 
+import copy_array
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\thinc\__init__.py
+", line 5, in <module>
+    from .config 
+import registry
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\thinc\config.py",
+ line 5, in <module>
+    from .types import 
+Decorator
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\thinc\types.py", 
+line 27, in <module>
+    from .compat 
+import cupy, has_cupy
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\thinc\compat.py",
+ line 35, in <module>
+    import torch
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\torch\__init__.py
+", line 280, in 
+<module>
+    
+_load_dll_libraries()
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\torch\__init__.py
+", line 276, in 
+_load_dll_libraries
+    raise err
+OSError: [WinError 
+1920] The file cannot 
+be accessed by the 
+system. Error loading 
+"D:\Legal Assistant AI_
+model-1\backend\venv\li
+b\site-packages\torch\l
+ib\torch_python.dll" 
+or one of its 
+dependencies.

@@ -1,0 +1,106 @@
+﻿python : D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\google\api_core\_
+python_version_support.
+py:275: FutureWarning: 
+You are using a Python 
+version (3.10.8) which 
+Google will stop 
+supporting in new 
+releases of 
+google.api_core once 
+it reaches its end of 
+life (2026-10-04). 
+Please upgrade to the 
+latest Python version, 
+or at least Python 
+3.11, to continue 
+receiving updates for 
+google.api_core past 
+that date.
+At line:1 char:65
++ ... te; pip install 
+--force-reinstall 
+rpds-py; python app.py 
+2>&1 | Out-F ...
++                      
+                       
+   ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (D:\Legal Assi   
+ st...past that dat    
+e.:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+  
+warnings.warn(message, 
+FutureWarning)
+Traceback (most recent 
+call last):
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\app.py", line 
+15, in <module>
+    from ragmodel 
+import 
+ingest_document, 
+retrieve_context # 
+pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\ragmodel.py", 
+line 1, in <module>
+    import chromadb # 
+pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\chromadb\__init__
+.py", line 3, in 
+<module>
+    from 
+chromadb.api.client 
+import Client as 
+ClientCreator
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\chromadb\api\clie
+nt.py", line 14, in 
+<module>
+    from chromadb.api.s
+hared_system_client 
+import 
+SharedSystemClient
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\chromadb\api\shar
+ed_system_client.py", 
+line 6, in <module>
+    from chromadb.api.b
+ase_http_client import 
+BaseHTTPClient
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\chromadb\api\base
+_http_client.py", line 
+4, in <module>
+    import orjson as 
+json
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\orjson\__init__.p
+y", line 4, in <module>
+    from .orjson 
+import *
+ModuleNotFoundError: 
+No module named 
+'orjson.orjson'

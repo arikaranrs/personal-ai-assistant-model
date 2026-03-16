@@ -1,0 +1,181 @@
+﻿python : D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\google\api_core\_
+python_version_support.
+py:275: FutureWarning: 
+You are using a Python 
+version (3.10.8) which 
+Google will stop 
+supporting in new 
+releases of 
+google.api_core once 
+it reaches its end of 
+life (2026-10-04). 
+Please upgrade to the 
+latest Python version, 
+or at least Python 
+3.11, to continue 
+receiving updates for 
+google.api_core past 
+that date.
+At line:1 char:68
++ ...  pip install 
+--force-reinstall 
+setuptools; python 
+app.py 2>&1 | Out-F ...
++                      
+                       
+   ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (D:\Legal Assi   
+ st...past that dat    
+e.:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+  
+warnings.warn(message, 
+FutureWarning)
+Initializing Embedding Model BAAI/bge-small-en...
+
+Loading weights:   0%| 
+         | 0/199 
+[00:00<?, ?it/s]
+Loading weights: 
+100%|##########| 
+199/199 [00:00<00:00, 
+13363.22it/s]
+[1mBertModel LOAD 
+REPORT[0m from: 
+BAAI/bge-small-en
+Key                    
+ | Status     |  | 
+-----------------------
+-+------------+--+-
+embeddings.position_ids
+ | UNEXPECTED |  | 
+
+[3mNotes:
+- UNEXPECTED[3m	:can 
+be ignored when 
+loading from different 
+task/architecture; not 
+ok if you expect 
+identical arch.[0m
+Initializing ChromaDB...
+Traceback (most recent 
+call last):
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\app.py", line 
+16, in <module>
+    from xtts_engine 
+import generate_voice 
+# pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\xtts_engine.py", 
+line 7, in <module>
+    from TTS.api 
+import TTS # 
+pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\TTS\api.py", 
+line 9, in <module>
+    from TTS.utils.audi
+o.numpy_transforms 
+import save_wav
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\TTS\utils\audio\_
+_init__.py", line 1, 
+in <module>
+    from TTS.utils.audi
+o.processor import 
+AudioProcessor
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\TTS\utils\audio\p
+rocessor.py", line 10, 
+in <module>
+    from TTS.utils.audi
+o.numpy_transforms 
+import (
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\TTS\utils\audio\n
+umpy_transforms.py", 
+line 8, in <module>
+    from librosa 
+import magphase, pyin
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\lazy_loader\__ini
+t__.py", line 79, in 
+__getattr__
+    attr = 
+getattr(submod, name)
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\lazy_loader\__ini
+t__.py", line 78, in 
+__getattr__
+    submod = importlib.
+import_module(submod_pa
+th)
+  File "C:\Users\arika\
+AppData\Local\Programs\
+Python\Python310\lib\im
+portlib\__init__.py", 
+line 126, in 
+import_module
+    return _bootstrap._
+gcd_import(name[level:]
+, package, level)
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\librosa\core\spec
+trum.py", line 14, in 
+<module>
+    from . import 
+convert
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\librosa\core\conv
+ert.py", line 7, in 
+<module>
+    from . import 
+notation
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\librosa\core\nota
+tion.py", line 8, in 
+<module>
+    from .intervals 
+import INTERVALS
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\librosa\core\inte
+rvals.py", line 8, in 
+<module>
+    from pkg_resources 
+import 
+resource_filename
+ModuleNotFoundError: 
+No module named 
+'pkg_resources'

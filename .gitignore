@@ -1,0 +1,16 @@
+venv/
+node_modules/
+.env
+__pycache__/
+*.pyc
+chroma_db/
+dist/
+build/
+backend/serviceAccountKey.json
+backend/serviceAccountKey.json
+backend/data/
+backend/data/chromadb/
+backend/audio_outputs/
+venv/
+node_modules/
+.env

@@ -1,0 +1,110 @@
+﻿python : Traceback 
+(most recent call 
+last):
+At line:1 char:26
++ .\venv\Scripts\activa
+te; python app.py 2>&1 
+| Out-File -Encoding 
+utf8 ...
++                      
+    ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Traceback (mo   
+ st recent call las    
+t)::String) [], Re    
+moteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\firebase_admin\fi
+restore.py", line 27, 
+in <module>
+    from google.cloud 
+import firestore
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\google\cloud\fire
+store\__init__.py", 
+line 18, in <module>
+    from google.cloud.f
+irestore_v1 import 
+gapic_version as 
+package_version
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\google\cloud\fire
+store_v1\__init__.py", 
+line 25, in <module>
+    from google.cloud.f
+irestore_v1._helpers 
+import (
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\google\cloud\fire
+store_v1\_helpers.py", 
+line 35, in <module>
+    import grpc  # 
+type: ignore
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\grpc\__init__.py"
+, line 22, in <module>
+    from grpc import 
+_compression
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\grpc\_compression
+.py", line 20, in 
+<module>
+    from grpc._cython 
+import cygrpc
+ImportError: cannot 
+import name 'cygrpc' 
+from 'grpc._cython' 
+(D:\Legal Assistant AI_
+model-1\backend\venv\li
+b\site-packages\grpc\_c
+ython\__init__.py)
+
+The above exception 
+was the direct cause 
+of the following 
+exception:
+
+Traceback (most recent 
+call last):
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\app.py", line 
+12, in <module>
+    from 
+firebase_admin import 
+firestore # 
+pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\firebase_admin\fi
+restore.py", line 34, 
+in <module>
+    raise 
+ImportError('Failed to 
+import the Cloud 
+Firestore library for 
+Python. Make sure '
+ImportError: Failed to 
+import the Cloud 
+Firestore library for 
+Python. Make sure to 
+install the "google-clo
+ud-firestore" module.

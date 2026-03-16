@@ -1,0 +1,120 @@
+﻿Initializing Coqui XTTS v2 model... (this may take a moment)
+python : 
+At line:1 char:1
++ python -c "from 
+xtts_engine import 
+generate_voice; 
+print(generate_voi ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (:String) [],    
+ RemoteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+Fetching 9 files:   
+0%|          | 0/9 
+[00:00<?, ?it/s]Xet 
+Storage is enabled for 
+this repo, but the 
+'hf_xet' package is 
+not installed. Falling 
+back to regular HTTP 
+download. For better 
+performance, install 
+the package with: `pip 
+install huggingface_hub
+[hf_xet]` or `pip 
+install hf_xet`
+Xet Storage is enabled 
+for this repo, but the 
+'hf_xet' package is 
+not installed. Falling 
+back to regular HTTP 
+download. For better 
+performance, install 
+the package with: `pip 
+install huggingface_hub
+[hf_xet]` or `pip 
+install hf_xet`
+Xet Storage is enabled 
+for this repo, but the 
+'hf_xet' package is 
+not installed. Falling 
+back to regular HTTP 
+download. For better 
+performance, install 
+the package with: `pip 
+install huggingface_hub
+[hf_xet]` or `pip 
+install hf_xet`
+
+Fetching 9 files:  
+11%|#1        | 1/9 
+[00:01<00:12,  1.52s/it
+]C:\Users\arika\AppData
+\Local\Programs\Python\
+Python312\Lib\site-pack
+ages\huggingface_hub\fi
+le_download.py:143: 
+UserWarning: 
+`huggingface_hub` 
+cache-system uses 
+symlinks by default to 
+efficiently store 
+duplicated files but 
+your machine does not 
+support them in C:\User
+s\arika\.cache\huggingf
+ace\hub\models--tts-hub
+--XTTS-v2. Caching 
+files will still work 
+but in a degraded 
+version that might 
+require more space on 
+your disk. This 
+warning can be 
+disabled by setting 
+the `HF_HUB_DISABLE_SYM
+LINKS_WARNING` 
+environment variable. 
+For more details, see h
+ttps://huggingface.co/d
+ocs/huggingface_hub/how
+-to-cache#limitations.
+To support symlinks on 
+Windows, you either 
+need to activate 
+Developer Mode or to 
+run Python as an 
+administrator. In 
+order to activate 
+developer mode, see 
+this article: https://d
+ocs.microsoft.com/en-us
+/windows/apps/get-start
+ed/enable-your-device-f
+or-development
+  
+warnings.warn(message)
+
+Fetching 9 files:  
+67%|######6   | 6/9 
+[00:02<00:00,  
+3.45it/s]
+Fetching 9 files:  
+78%|#######7  | 7/9 
+[06:34<02:37, 
+78.85s/it]
+Fetching 9 files: 
+100%|##########| 9/9 
+[06:34<00:00, 
+43.82s/it]
+[XTTS] Detected language: en
+[XTTS] Audio successfully generated at: D:\Legal Assistant AI_model-1\backend\audio_outputs\response.wav
+D:\Legal Assistant AI_model-1\backend\audio_outputs\response.wav

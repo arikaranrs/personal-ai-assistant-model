@@ -1,0 +1,89 @@
+﻿python : D:\Legal 
+Assistant AI_model-1\ba
+ckend\venv\lib\site-pac
+kages\google\api_core\_
+python_version_support.
+py:275: FutureWarning: 
+You are using a Python 
+version (3.10.8) which 
+Google will stop 
+supporting in new 
+releases of 
+google.api_core once 
+it reaches its end of 
+life (2026-10-04). 
+Please upgrade to the 
+latest Python version, 
+or at least Python 
+3.11, to continue 
+receiving updates for 
+google.api_core past 
+that date.
+At line:1 char:58
++ ... \activate; pip 
+install 
+setuptools==68.2.2; 
+python app.py 2>&1 | 
+Out-F ...
++                      
+                       
+   ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (D:\Legal Assi   
+ st...past that dat    
+e.:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+  
+warnings.warn(message, 
+FutureWarning)
+Initializing Embedding Model BAAI/bge-small-en...
+
+Loading weights:   0%| 
+         | 0/199 
+[00:00<?, ?it/s]
+Loading weights: 
+100%|##########| 
+199/199 [00:00<00:00, 
+9172.97it/s]
+[1mBertModel LOAD 
+REPORT[0m from: 
+BAAI/bge-small-en
+Key                    
+ | Status     |  | 
+-----------------------
+-+------------+--+-
+embeddings.position_ids
+ | UNEXPECTED |  | 
+
+[3mNotes:
+- UNEXPECTED[3m	:can 
+be ignored when 
+loading from different 
+task/architecture; not 
+ok if you expect 
+identical arch.[0m
+Initializing ChromaDB...
+Traceback (most recent 
+call last):
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\app.py", line 
+16, in <module>
+    from xtts_engine 
+import generate_voice 
+# pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\ba
+ckend\xtts_engine.py", 
+line 8, in <module>
+    from langdetect 
+import detect # 
+pyre-ignore[21]
+ModuleNotFoundError: 
+No module named 
+'langdetect'

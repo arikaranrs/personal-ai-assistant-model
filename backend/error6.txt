@@ -1,0 +1,150 @@
+﻿python : D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\google\api_core\_pyt
+hon_version_support.py:2
+75: FutureWarning: You 
+are using a Python 
+version (3.10.8) which 
+Google will stop 
+supporting in new 
+releases of 
+google.api_core once it 
+reaches its end of life 
+(2026-10-04). Please 
+upgrade to the latest 
+Python version, or at 
+least Python 3.11, to 
+continue receiving 
+updates for 
+google.api_core past 
+that date.
+At line:1 char:64
++ ... ate; pip install 
+--force-reinstall 
+orjson; python app.py 
+2>&1 | Out-F ...
++                       
+                        
+ ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo      
+        : NotSpecified  
+  : (D:\Legal Assist.   
+ ..past that date.:S    
+tring) [], RemoteEx    
+ception
+    + FullyQualifiedErr 
+   orId : NativeComman  
+  dError
+ 
+  
+warnings.warn(message, 
+FutureWarning)
+Traceback (most recent 
+call last):
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\app.py", line 15, 
+in <module>
+    from ragmodel 
+import ingest_document, 
+retrieve_context # 
+pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\ragmodel.py", line 
+2, in <module>
+    from 
+sentence_transformers 
+import 
+SentenceTransformer # 
+pyre-ignore[21]
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\sentence_transformer
+s\__init__.py", line 
+10, in <module>
+    from sentence_transf
+ormers.backend import (
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\sentence_transformer
+s\backend\__init__.py", 
+line 3, in <module>
+    from .load import 
+load_onnx_model, 
+load_openvino_model
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\sentence_transformer
+s\backend\load.py", 
+line 7, in <module>
+    from transformers.co
+nfiguration_utils 
+import PretrainedConfig
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\transformers\__init_
+_.py", line 30, in 
+<module>
+    from . import depend
+ency_versions_check
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\transformers\depende
+ncy_versions_check.py", 
+line 16, in <module>
+    from 
+.utils.versions import 
+require_version, 
+require_version_core
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\transformers\utils\_
+_init__.py", line 22, 
+in <module>
+    from 
+.auto_docstring import (
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\transformers\utils\a
+uto_docstring.py", line 
+24, in <module>
+    import regex as re
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\regex\__init__.py", 
+line 1, in <module>
+    import regex._main
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\regex\_main.py", 
+line 427, in <module>
+    from regex import 
+_regex_core
+  File "D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\regex\_regex_core.py
+", line 21, in <module>
+    from regex import 
+_regex
+ImportError: cannot 
+import name '_regex' 
+from partially 
+initialized module 
+'regex' (most likely 
+due to a circular 
+import) (D:\Legal 
+Assistant AI_model-1\bac
+kend\venv\lib\site-packa
+ges\regex\__init__.py)
