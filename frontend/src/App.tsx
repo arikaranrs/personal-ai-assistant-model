@@ -116,7 +116,7 @@ function App() {
 
   const fetchConversations = async () => {
     try {
-      const res = await fetch(`/api/conversations/${session.user.id}`);
+      const res = await fetch(`fetch(\https://www.google.com/search?q=https://saara1310-final-year-project.hf.space/api/conversations/${session.user.id}`);
       if (res.ok) {
         const data = await res.json();
         setConversations(data);
@@ -129,7 +129,7 @@ function App() {
   const loadConversation = async (id: string) => {
     if (!session?.user?.id) return;
     try {
-      const res = await fetch(`/api/conversations/${session.user.id}/${id}`);
+      const res = await fetch(`https://saara1310-final-year-project.hf.space/api/conversations/${session.user.id}/${id}`);
       if (res.ok) {
         const data = await res.json();
         setMessages(data);
@@ -169,7 +169,7 @@ function App() {
   const handleDeleteConversation = async (id: string | null) => {
     if (!id || !session?.user?.id) return;
     try {
-      const res = await fetch(`/api/conversations/${session.user.id}/${id}`, { method: 'DELETE' });
+      const res = await fetch(`https://saara1310-final-year-project.hf.space/api/conversations/${session.user.id}/${id}`, { method: 'DELETE' });
       if (res.ok) {
         setConversations(prev => prev.filter(c => c.id !== id));
         if (currentConversationId === id) {
@@ -188,7 +188,7 @@ function App() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`/api/conversations/${session.user.id}`, { method: 'DELETE' });
+      const res = await fetch(`https://saara1310-final-year-project.hf.space/api/conversations/${session.user.id}`, { method: 'DELETE' });
       if (res.ok) {
         setConversations([]);
         startNewChat();
@@ -211,7 +211,7 @@ function App() {
       return;
     }
     try {
-      const res = await fetch(`/api/conversations/${session.user.id}/${id}`, {
+      const res = await fetch(`https://saara1310-final-year-project.hf.space/api/conversations/${session.user.id}/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: renameTitle.trim() })
@@ -276,7 +276,8 @@ function App() {
       }
 
       // Send to our new Node.js Express backend integrating Firebase + Ollama
-      const response = await fetch('/api/chat', {
+      // Send to our new Node.js Express backend integrating Firebase + Ollama
+      const response = await fetch('https://saara1310-final-year-project.hf.space/api/chat', {
         method: 'POST',
         headers,
         body,

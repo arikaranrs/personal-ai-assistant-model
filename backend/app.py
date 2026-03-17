@@ -22,7 +22,7 @@ from ragmodel import ingest_document, retrieve_context # pyre-ignore[21]
 from xtts_engine import generate_voice # pyre-ignore[21]
 
 # Import llama reasoning engine
-from llama_reasoner import generate_response # pyre-ignore[21]
+from backend.llama_reasoner_1 import generate_response # pyre-ignore[21]
 
 
 
@@ -263,6 +263,11 @@ def get_audio(filename):
         print(f"Error serving audio: {e}")
         return jsonify({'error': str(e)}), 500
 
+#if __name__ == '__main__':
+ #   print("Starting Flask Backend on http://localhost:5000")
+  #  app.run(port=5000, debug=True, use_reloader=False)
+
+# TO THIS:
 if __name__ == '__main__':
-    print("Starting Flask Backend on http://localhost:5000")
-    app.run(port=5000, debug=True, use_reloader=False)
+    print("Starting Flask Backend on Hugging Face (Port 7860)")
+    app.run(host='0.0.0.0', port=7860, debug=False, use_reloader=False)
