@@ -1264,21 +1264,46 @@ But Llama 3.1 is a new technology, and like any new technology, there are risks 
 
 In Terminal 1:
 
-ollama run llama3.1
+## ollama run llama3.1
+
+
 
 In Terminal 2:
 
-cd "d:\Legal Assistant AI_model-1\backend"
+## cd "d:\Legal Assistant AI_model-1\backend"
+## .\venv\Scripts\activate
+## python app.py
+# 1. Navigate to the backend folder
+cd backend
+
+# 2. Activate the virtual environment (if it's not already activated)
+# Assuming you previously created one named 'venv'
 .\venv\Scripts\activate
+
+# 3. Install the required Python packages
+# Note: Installing llama-cpp-python might take a moment and requires C++ Build Tools installed on your PC.
+pip install -r requirements.txt
+
+# 4. Start the Flask server
 python app.py
 
 
 
 In Terminal 3:
 
-cd "D:\Legal Assistant AI_model-1\frontend"
-npm install --legacy-peer-deps
+# 1. Navigate to the frontend folder
+cd frontend
+
+# 2. Install the Node.js dependencies (only needed the first time or if packages changed)
+npm install
+
+# 3. Start the development server
 npm run dev
+
+
+## cd "D:\Legal Assistant AI_model-1\frontend"
+## npm install --legacy-peer-deps
+## npm run dev
 
 
 deactivate

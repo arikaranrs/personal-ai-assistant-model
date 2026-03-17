@@ -1,124 +1,137 @@
-import numpy as np # pyre-ignore[21]
-from sentence_transformers import SentenceTransformer, util # pyre-ignore[21]
-from langchain_text_splitters import RecursiveCharacterTextSplitter # pyre-ignore[21]
-from firebase import db # pyre-ignore[21]
-import chromadb # pyre-ignore[21]
+from sentence_transformers import SentenceTransformer  # pyre-ignore[21]
+from langchain_text_splitters import RecursiveCharacterTextSplitter  # pyre-ignore[21]
+from firebase import db  # pyre-ignore[21]
+import chromadb  # pyre-ignore[21]
 
 # ==========================================
-# RAG PIPELINE: CHROMA DB RETRIEVAL & EMBEDDING
+# RAG PIPELINE — ChromaDB + Firebase
 # ==========================================
 
-print("Initializing Embedding Model BAAI/bge-small-en...")
+print("[RAG] Initializing embedding model BAAI/bge-small-en...")
 try:
     embedding_model = SentenceTransformer("BAAI/bge-small-en")
+    print("[RAG] Embedding model loaded.")
 except Exception as e:
-    print(f"Error loading embedding model: {e}")
+    print(f"[RAG] ERROR loading embedding model: {e}")
     embedding_model = None
 
-# Initialize ChromaDB persistent client
+# ChromaDB persistent client
 chroma_client = chromadb.PersistentClient(path="./data/chromadb")
 collection = chroma_client.get_or_create_collection(name="legal_documents")
 
-def sync_chroma_from_firebase():
-    """Syncs existing Firebase legal_documents to ChromaDB on startup if empty."""
+# Text splitter
+splitter = RecursiveCharacterTextSplitter(chunk_size=600, chunk_overlap=100)
+
+
+def _sync_chroma_from_firebase():
+    """Sync Firebase legal_documents → ChromaDB on startup (only if ChromaDB is empty)."""
     if embedding_model is None or db is None:
         return
-    existing_count = collection.count()
-    if existing_count > 0:
-        print(f"ChromaDB already has {existing_count} documents. Skipping sync.")
+    if collection.count() > 0:
+        print(f"[RAG] ChromaDB has {collection.count()} documents. Skipping sync.")
         return
-        
-    print("Syncing ChromaDB with Firebase Firestore...")
-    docs = db.collection('legal_documents').stream()
-    for doc in docs:
-        data = doc.to_dict()
-        text = data.get('content')
-        source = data.get('source', 'unknown')
-        chunk_id = data.get('chunk_id', 0)
-        
-        if text:
-            # Generate embedding and add to ChromaDB
-            embedding = embedding_model.encode(text).tolist()
-            collection.add(
-                documents=[text],
-                embeddings=[embedding],
-                metadatas=[{"source": source, "chunk_id": chunk_id}],
-                ids=[doc.id]
-            )
-    print(f"Synced {collection.count()} documents to ChromaDB.")
+    print("[RAG] Syncing ChromaDB from Firebase...")
+    try:
+        docs = db.collection("legal_documents").stream()
+        count = 0
+        for doc in docs:
+            data = doc.to_dict()
+            text = data.get("content")
+            if text:
+                embedding = embedding_model.encode(text).tolist()
+                collection.add(
+                    documents=[text],
+                    embeddings=[embedding],
+                    metadatas=[{"source": data.get("source", "unknown"), "chunk_id": data.get("chunk_id", 0)}],
+                    ids=[doc.id],
+                )
+                count += 1
+        print(f"[RAG] Synced {count} documents to ChromaDB.")
+    except Exception as e:
+        print(f"[RAG] Firebase sync error: {e}")
 
-# Run sync on startup
-sync_chroma_from_firebase()
 
-# Text Splitter Setup
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=600,
-    chunk_overlap=100
-)
+_sync_chroma_from_firebase()
 
-def ingest_document(doc_id, text, metadata=None):
+
+def ingest_document(doc_id: str, text: str, metadata: dict = None) -> bool:
     """
-    Chunks text, stores it in Firebase Firestore, and embeds it into ChromaDB.
+    Chunks text → stores embeddings in ChromaDB, metadata in Firebase.
     """
-    if db is None or embedding_model is None or text is None:
-        print(f"Skipping ingest: Firestore/Model missing or text empty for {doc_id}")
+    if embedding_model is None or not text:
+        print(f"[RAG] Skipping ingest for {doc_id}: model or text missing.")
         return False
-        
+
     chunks = splitter.split_text(text)
     if not chunks:
         return False
-        
-    print(f"Ingesting {doc_id} into {len(chunks)} chunks in Firestore & ChromaDB...")
-    batch = db.batch()
-    docs_ref = db.collection('legal_documents')
-    
+
+    print(f"[RAG] Ingesting '{doc_id}' → {len(chunks)} chunks...")
+    batch = db.batch() if db else None
+    docs_ref = db.collection("legal_documents") if db else None
+
     for i, chunk in enumerate(chunks):
-        chunk_doc_id = f"{doc_id}_{i}"
-        
-        # 1. Firebase Write
-        doc_ref = docs_ref.document(chunk_doc_id)
+        chunk_id = f"{doc_id}_{i}"
         meta = {"source": doc_id, "chunk_id": i, "content": chunk}
         if metadata:
             meta.update(metadata)
-        batch.set(doc_ref, meta)
-        
-        # 2. ChromaDB Write
+
+        # ChromaDB
         embedding = embedding_model.encode(chunk).tolist()
-        collection.add(
-            documents=[chunk],
-            embeddings=[embedding],
-            metadatas=[meta],
-            ids=[chunk_doc_id]
-        )
-        
-    batch.commit()
-    print(f"Document {doc_id} indexed successfully in Firestore & ChromaDB.")
+        try:
+            collection.add(
+                documents=[chunk],
+                embeddings=[embedding],
+                metadatas=[{"source": doc_id, "chunk_id": i}],
+                ids=[chunk_id],
+            )
+        except Exception:
+            # Already exists — update instead
+            collection.update(
+                documents=[chunk],
+                embeddings=[embedding],
+                metadatas=[{"source": doc_id, "chunk_id": i}],
+                ids=[chunk_id],
+            )
+
+        # Firebase: metadata only (no embeddings)
+        if batch and docs_ref:
+            doc_ref = docs_ref.document(chunk_id)
+            batch.set(doc_ref, {"source": doc_id, "chunk_id": i, "content": chunk})
+
+    if batch:
+        batch.commit()
+
+    print(f"[RAG] '{doc_id}' indexed: {len(chunks)} chunks.")
     return True
 
-def retrieve_context(query, n_results=5):
+
+def retrieve_context(query: str, n_results: int = 3) -> str:
     """
-    Retrieves the most semantic matching chunks from ChromaDB.
+    Retrieves top-3 semantically relevant chunks from ChromaDB.
+    Returns a merged string capped at ~1000 tokens.
     """
     if embedding_model is None:
         return ""
-        
+
     try:
-        # Embed query
         query_vector = embedding_model.encode(query).tolist()
-        
-        # Query ChromaDB
         results = collection.query(
             query_embeddings=[query_vector],
-            n_results=n_results
+            n_results=min(n_results, max(collection.count(), 1)),
         )
-        
-        documents = results.get('documents')
-        if documents and len(documents) > 0 and documents[0]:
-            retrieved_chunks = documents[0]
-            print(f"Retrieved {len(retrieved_chunks)} semantic chunks from ChromaDB for context.")
-            return "\n\n".join(retrieved_chunks)
-            
+        docs = results.get("documents", [[]])[0]
+        if not docs:
+            return ""
+
+        combined = "\n\n".join(docs)
+        # Cap at ~4000 chars (~1000 tokens)
+        if len(combined) > 4000:
+            combined = combined[:4000]
+
+        print(f"[RAG] Retrieved {len(docs)} chunks ({len(combined)} chars).")
+        return combined
+
     except Exception as e:
-        print(f"ChromaDB RAG Retrieval Error: {e}")
-        
-    return ""
+        print(f"[RAG] Retrieval error: {e}")
+        return ""

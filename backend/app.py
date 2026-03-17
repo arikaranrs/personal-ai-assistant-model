@@ -1,12 +1,18 @@
 import json
-from flask import Flask, request, jsonify, Response, send_file # pyre-ignore[21]
-from flask_cors import CORS # pyre-ignore[21]
+from flask import Flask, request, jsonify, Response, send_file  # pyre-ignore[21]
+from flask_cors import CORS  # pyre-ignore[21]
 import uuid
 import datetime
-from livekit import api # pyre-ignore[21]
 import os
-import requests # pyre-ignore[21]
-import importlib
+
+# LiveKit — optional; token endpoint returns error if unavailable
+try:
+    from livekit import api as livekit_api  # pyre-ignore[21]
+    _LIVEKIT_OK = True
+except Exception as _lk_err:
+    print(f"[App] LiveKit not available: {_lk_err}")
+    livekit_api = None
+    _LIVEKIT_OK = False
 
 # Import modular backend files
 from firebase_admin import firestore # pyre-ignore[21]
@@ -19,7 +25,7 @@ from xtts_engine import generate_voice # pyre-ignore[21]
 from llama_reasoner import generate_response # pyre-ignore[21]
 
 
-OLLAMA_URL = 'http://127.0.0.1:11434/api/generate'
+
 
 app = Flask(__name__)
 CORS(app)
@@ -222,23 +228,23 @@ def delete_all_conversations(user_id):
 # 7. Generate LiveKit Access Token
 @app.route('/api/livekit-token', methods=['GET'])
 def get_livekit_token():
+    if not _LIVEKIT_OK or livekit_api is None:
+        return jsonify({'error': 'LiveKit not configured on this server'}), 503
     try:
         user_id = request.args.get('userId', 'anonymous_user')
         room_name = request.args.get('room', 'legal-assistant-room')
-        
-        # In a real app these should be Environment Variables,
-        # but using the keys provided by the user directly for this implementation
-        api_key = "APInCF42PrCnsua"
-        api_secret = "HpeZXGWI4I8ICPeX7Kvs4bT5jOLQ0N5UMlB2aILWe3LA"
-        
-        token = api.AccessToken(api_key, api_secret) \
+
+        api_key = os.environ.get('LIVEKIT_API_KEY', 'APInCF42PrCnsua')
+        api_secret = os.environ.get('LIVEKIT_API_SECRET', 'HpeZXGWI4I8ICPeX7Kvs4bT5jOLQ0N5UMlB2aILWe3LA')
+
+        assert livekit_api is not None  # guarded by _LIVEKIT_OK check above
+        token = livekit_api.AccessToken(api_key, api_secret) \
             .with_identity(user_id) \
             .with_name(user_id) \
-            .with_grants(api.VideoGrants(
+            .with_grants(livekit_api.VideoGrants(
                 room_join=True,
                 room=room_name
             ))
-            
         return jsonify({'token': token.to_jwt()}), 200
     except Exception as e:
         print(f"Error generating LiveKit token: {e}")
